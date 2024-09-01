@@ -46,32 +46,6 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.PUT, "/api/usuarios").hasRole("ADMIN")
                                 //.requestMatchers(HttpMethod.DELETE, "/api/usuarios").hasRole("ADMIN").anyRequest().authenticated()
 
-//                                // Morador
-                                .requestMatchers(HttpMethod.GET, "/api/moradores").hasAnyRole("ADMIN", "USER") // Pode adicionar mais "MANAGER", etc
-                                .requestMatchers(HttpMethod.POST, "/api/moradores").hasRole("ADMIN") // Pode adicionar mais "MANAGER", etc
-                                .requestMatchers(HttpMethod.PUT, "/api/moradores").hasRole("ADMIN")
-                                //.requestMatchers(HttpMethod.DELETE, "/api/moradores").hasRole("ADMIN").anyRequest().authenticated()
-
-
-
-//                                // Data da Coleta
-                                .requestMatchers(HttpMethod.GET, "/api/coletas").hasAnyRole("ADMIN", "USER") // Pode adicionar mais "MANAGER", etc
-                                .requestMatchers(HttpMethod.POST, "/api/coletas").hasRole("ADMIN") // Pode adicionar mais "MANAGER", etc
-                                .requestMatchers(HttpMethod.PUT, "/api/coletas").hasRole("ADMIN")
-                                //.requestMatchers(HttpMethod.DELETE, "/api/coletas").hasRole("ADMIN").anyRequest().authenticated()
-
-                                // Imovel
-
-                                .requestMatchers(HttpMethod.GET, "/api/imoveis").hasAnyRole("ADMIN", "USER") // Pode adicionar mais "MANAGER", etc
-                                .requestMatchers(HttpMethod.POST, "/api/imoveis").hasRole("ADMIN") // Pode adicionar mais "MANAGER", etc
-                                .requestMatchers(HttpMethod.PUT, "/api/imoveis").hasRole("ADMIN")
-                                //.requestMatchers(HttpMethod.DELETE, "/api/imoveis").hasRole("ADMIN").anyRequest().authenticated()
-
-//                                // Caminhão
-//
-                                .requestMatchers(HttpMethod.GET, "/api/caminhoes").hasAnyRole("ADMIN", "USER") // Pode adicionar mais "MANAGER", etc
-                                .requestMatchers(HttpMethod.POST, "/api/caminhoes").hasRole("ADMIN") // Pode adicionar mais "MANAGER", etc
-                                .requestMatchers(HttpMethod.PUT, "/api/caminhoes").hasRole("ADMIN")
 
                                 // .anyRequest.authenticate sempre deverá ser o último após os .requestMatchers e rodar em uma linha só
 //                                .requestMatchers(HttpMethod.DELETE,
