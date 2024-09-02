@@ -23,4 +23,36 @@ public class Imagem {
 
     @Column(name = "descricao", length = 255)
     private String descricao;
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public byte[] getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(byte[] imagem) {
+        this.imagem = imagem;
+    }
+
+    public Email getEmail() {
+        return email;
+    }
+
+    public void setEmail(Email email) {
+        this.email = email;
+    }
+
+    public Long getIdImagem() {
+        return idImagem;
+    }
+
+    public void setIdImagem(Long idImagem) {
+        this.idImagem = idImagem;
+    }
 }
