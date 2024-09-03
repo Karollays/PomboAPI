@@ -38,10 +38,10 @@ public class EmailService {
             existingEmail.setDeEmail(emailDetails.getDeEmail());
             existingEmail.setParaEmail(emailDetails.getParaEmail());
             existingEmail.setAssunto(emailDetails.getAssunto());
-            existingEmail.setCorpo(emailDetails.getCorpo());
+//            existingEmail.setCorpo(emailDetails.getCorpo());
             existingEmail.setDataEmail(emailDetails.getDataEmail());
             existingEmail.setSpam(emailDetails.isSpam());
-            existingEmail.setImagens(emailDetails.getImagens());
+//            existingEmail.setImagens(emailDetails.getImagens());
             existingEmail.setEventos(emailDetails.getEventos());
             return emailRepository.save(existingEmail);
         } else {

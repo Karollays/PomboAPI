@@ -36,7 +36,7 @@ public class ImagemService {
         if (optionalImagem.isPresent()) {
             Imagem existingImagem = optionalImagem.get();
             existingImagem.setDescricao(imagemDetails.getDescricao());
-            existingImagem.setImagem(imagemDetails.getImagem());
+//            existingImagem.setImagem(imagemDetails.getImagem());
             return imagemRepository.save(existingImagem);
         } else {
             return null;

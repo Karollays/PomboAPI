@@ -1,13 +1,14 @@
 package com.fiap.pombo.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.sql.Clob;
 import java.sql.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "tb_email")
+@Table(name = "T_EMAIL")
 public class Email {
 
     @Id
@@ -19,6 +20,7 @@ public class Email {
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
+    @NotNull
     @Column(name = "de_email", nullable = false, length = 255)
     private String deEmail;
 
@@ -28,9 +30,9 @@ public class Email {
     @Column(name = "assunto", length = 255)
     private String assunto;
 
-    @Lob
-    @Column(name = "corpo")
-    private Clob corpo;
+//    @Lob
+//    @Column(name = "corpo")
+//    private Clob corpo;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "dt_email")
@@ -85,13 +87,13 @@ public class Email {
         this.assunto = assunto;
     }
 
-    public Clob getCorpo() {
-        return corpo;
-    }
-
-    public void setCorpo(Clob corpo) {
-        this.corpo = corpo;
-    }
+//    public Clob getCorpo() {
+//        return corpo;
+//    }
+//
+//    public void setCorpo(Clob corpo) {
+//        this.corpo = corpo;
+//    }
 
     public Date getDataEmail() {
         return dataEmail;
