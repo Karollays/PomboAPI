@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import javax.print.attribute.standard.MediaSize;
 
 @Entity
-@Table(name = "imagem")
+@Table(name = "T_IMAGEM")
 public class Imagem {
 
     @Id
@@ -17,9 +17,9 @@ public class Imagem {
     @JoinColumn(name = "id_email", nullable = false)
     private Email email;
 
-    @Lob
-    @Column(name = "imagem")
-    private byte[] imagem;
+//    @Lob
+//    @Column(name = "imagem")
+//    private byte[] imagem;
 
     @Column(name = "descricao", length = 255)
     private String descricao;
@@ -32,13 +32,13 @@ public class Imagem {
         this.descricao = descricao;
     }
 
-    public byte[] getImagem() {
-        return imagem;
-    }
-
-    public void setImagem(byte[] imagem) {
-        this.imagem = imagem;
-    }
+//    public byte[] getImagem() {
+//        return imagem;
+//    }
+//
+//    public void setImagem(byte[] imagem) {
+//        this.imagem = imagem;
+//    }
 
     public Email getEmail() {
         return email;

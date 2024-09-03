@@ -40,7 +40,7 @@ public class EventoService {
             existingEvento.setHoraInicial(eventoDetails.getHoraInicial());
             existingEvento.setDataFinal(eventoDetails.getDataFinal());
             existingEvento.setHoraFinal(eventoDetails.getHoraFinal());
-            existingEvento.setDescricao(eventoDetails.getDescricao());
+//            existingEvento.setDescricao(eventoDetails.getDescricao());
             existingEvento.setLocalizacao(eventoDetails.getLocalizacao());
             return eventoRepository.save(existingEvento);
         } else {

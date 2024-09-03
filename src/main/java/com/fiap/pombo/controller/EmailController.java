@@ -2,6 +2,7 @@ package com.fiap.pombo.controller;
 
 import com.fiap.pombo.model.Email;
 import com.fiap.pombo.service.EmailService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,11 @@ public class EmailController {
 
     // Create a new email
     @PostMapping
-    public ResponseEntity<Email> createEmail(@RequestBody Email email) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Email> createEmail(@RequestBody @Valid Email email) {
+        if (email.getDeEmail() == null || email.getDeEmail().isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         Email createdEmail = emailService.saveEmail(email);
         return new ResponseEntity<>(createdEmail, HttpStatus.CREATED);
     }

@@ -7,7 +7,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "tb_evento")
+@Table(name = "T_EVENTO")
 public class Evento {
 
     @Id
@@ -36,9 +36,9 @@ public class Evento {
     @Column(name = "hr_final")
     private Timestamp horaFinal;
 
-    @Lob
-    @Column(name = "descricao")
-    private Clob descricao;
+//    @Lob
+//    @Column(name = "descricao")
+//    private Clob descricao;
 
     @Column(name = "localizacao", length = 255)
     private String localizacao;
@@ -99,13 +99,13 @@ public class Evento {
         this.horaFinal = horaFinal;
     }
 
-    public Clob getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(Clob descricao) {
-        this.descricao = descricao;
-    }
+//    public Clob getDescricao() {
+//        return descricao;
+//    }
+//
+//    public void setDescricao(Clob descricao) {
+//        this.descricao = descricao;
+//    }
 
     public String getLocalizacao() {
         return localizacao;

@@ -22,52 +22,30 @@ public class SecurityConfig {
     private VerificarToken verificarToken;
 
     @Bean
-    public SecurityFilterChain filtrarCadeiaDeSegurança(
+    public SecurityFilterChain filtrarCadeiaDeSegurança(HttpSecurity httpSecurity) throws Exception{
 
-            HttpSecurity httpSecurity) throws Exception{
-
-        return httpSecurity.csrf(csrf -> csrf.disable())
-                .sessionManagement(
-                        session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        return httpSecurity
+                .csrf(csrf -> csrf.disable())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                                // Acionando a consulta GET para qualquer pessoa
-//                        .requestMatchers(HttpMethod.GET, "/api/moradores")
-//                        .permitAll()
-//                        .anyRequest()
-//                        .authenticated()
-//                        )
-                                //Acionando a gravação POST para usuários ADMIN
-                                .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+                        // Permitir registro e login
+                        .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
 
-                                // Usuario
-                                .requestMatchers(HttpMethod.GET, "/api/usuarios").hasAnyRole("ADMIN", "USER") // Pode adicionar mais "MANAGER", etc
-                                .requestMatchers(HttpMethod.POST, "/api/usuarios").hasRole("ADMIN") // Pode adicionar mais "MANAGER", etc
-                                .requestMatchers(HttpMethod.PUT, "/api/usuarios").hasRole("ADMIN")
-                                //.requestMatchers(HttpMethod.DELETE, "/api/usuarios").hasRole("ADMIN").anyRequest().authenticated()
+                        // Permissões para endpoints de usuários
+                        .requestMatchers(HttpMethod.GET, "/api/usuarios").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.POST, "/api/usuarios").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/usuarios").hasRole("ADMIN")
 
+                        // Permissões para endpoints de emails
+                        .requestMatchers(HttpMethod.GET, "/emails").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/emails").authenticated()
+                        .requestMatchers(HttpMethod.PUT, "/emails").hasRole("ADMIN")
 
-                                // .anyRequest.authenticate sempre deverá ser o último após os .requestMatchers e rodar em uma linha só
-//                                .requestMatchers(HttpMethod.DELETE,
-//                                "/api/usuarios",
-//                                "/api/moradores",
-//                                "/api/caminhoes",
-//                                "/api/coletas",
-//                                "/api/imoveis")
-//                                .hasRole("ADMIN").anyRequest().authenticated()
-
-                                //Apenas para Usuário
-                                .requestMatchers(HttpMethod.DELETE, "/api").hasRole("ADMIN").anyRequest().authenticated()
-//                                .requestMatchers(HttpMethod.DELETE, "/api/usuarios", "/api/moradores", "/api/coletas", "/api/caminhoes").hasRole("ADMIN").anyRequest().authenticated()
-
+                        // Autenticação necessária para qualquer outra requisição
+                        .anyRequest().authenticated()
                 )
-
-
-
-                .addFilterBefore(
-                        verificarToken,
-                        UsernamePasswordAuthenticationFilter.class
-                )
+                .addFilterBefore(verificarToken, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 
