@@ -1,78 +1,82 @@
 package com.fiap.pombo.model;
 
 import jakarta.persistence.*;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(name = "tb_usuario")
-public class Usuario {
-
+@Table(name = "T_USUARIO")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
+public class Usuario implements UserDetails{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "SEQ_T_USUARIO")
+    @SequenceGenerator(
+            name = "SEQ_T_USUARIO",
+            sequenceName = "SEQ_T_USUARIO",
+            allocationSize = 1)
     @Column(name = "id_usuario")
-    private Long idUsuario;
-
-    @Column(name = "nm_usuario", nullable = false, length = 255)
-    private String nomeUsuario;
-
-    @Column(name = "ds_email", nullable = false, unique = true, length = 255)
+    private Long id;
+    @Column(name = "nm_usuario")
+    private String nome;
+    @Column(name = "ds_email")
     private String email;
-
-    @Column(name = "ds_senha", nullable = false, length = 255)
+    @Column(name = "ds_senha")
     private String senha;
 
-    @Column(name = "role", nullable = false, length = 50)
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private UsuarioRole role;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Email> emails;
-
-    public List<Email> getEmails() {
-        return emails;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (this.role == UsuarioRole.ADMIN) {
+            return List.of(
+                    new SimpleGrantedAuthority("ROLE_ADMIN"),
+                    new SimpleGrantedAuthority("ROLE_USER")
+            );
+        } else {
+            return List.of(
+                    new SimpleGrantedAuthority(("ROLE_USER"))
+            );
+        }
+    }
+    @Override
+    public String getPassword() {
+        return this.senha;
     }
 
-    public void setEmails(List<Email> emails) {
-        this.emails = emails;
+    @Override
+    public String getUsername() {
+        return this.email;
     }
 
-    public Long getIdUsuario() {
-        return idUsuario;
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
     }
 
-    public String getRole() {
-        return role;
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getNomeUsuario() {
-        return nomeUsuario;
-    }
-
-    public void setNomeUsuario(String nomeUsuario) {
-        this.nomeUsuario = nomeUsuario;
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
