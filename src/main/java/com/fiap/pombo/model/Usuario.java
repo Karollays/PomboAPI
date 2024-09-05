@@ -50,6 +50,7 @@ public class Usuario implements UserDetails{
             );
         }
     }
+
     @Override
     public String getPassword() {
         return this.senha;

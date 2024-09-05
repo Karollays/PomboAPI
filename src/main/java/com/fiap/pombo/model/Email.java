@@ -30,6 +30,9 @@ public class Email {
     @Column(name = "assunto", length = 255)
     private String assunto;
 
+    @Column(name = "mensagem", nullable = false, length = 4000)
+    private String mensagem;
+
 //    @Lob
 //    @Column(name = "corpo")
 //    private Clob corpo;
@@ -86,6 +89,12 @@ public class Email {
     public void setAssunto(String assunto) {
         this.assunto = assunto;
     }
+
+    public String getMensagem() {return mensagem;}
+
+    public void setMensagem(String mensagem) {this.mensagem = mensagem;}
+
+
 
 //    public Clob getCorpo() {
 //        return corpo;

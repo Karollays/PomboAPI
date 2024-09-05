@@ -38,12 +38,12 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/api/usuarios").hasRole("ADMIN")
 
                         // Permissões para endpoints de emails
-                        .requestMatchers(HttpMethod.GET, "/emails").authenticated()
-                        .requestMatchers(HttpMethod.POST, "/emails").authenticated()
-                        .requestMatchers(HttpMethod.PUT, "/emails").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/emails").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.POST, "/api/emails").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/emails").hasRole("ADMIN")
 
-                        // Autenticação necessária para qualquer outra requisição
-                        .anyRequest().authenticated()
+                        // Deletar e Autenticar para qualquer outra requisição
+                        .requestMatchers(HttpMethod.DELETE, "/api").hasRole("ADMIN").anyRequest().authenticated()
                 )
                 .addFilterBefore(verificarToken, UsernamePasswordAuthenticationFilter.class)
                 .build();
