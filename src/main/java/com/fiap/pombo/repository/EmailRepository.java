@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EmailRepository extends JpaRepository<Email, Long> {
-    // JpaRepository já fornece os métodos básicos como save, findAll, findById, existsById e deleteById.
 }
