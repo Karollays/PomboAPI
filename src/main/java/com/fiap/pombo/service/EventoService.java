@@ -1,9 +1,22 @@
 package com.fiap.pombo.service;
 
+import com.fiap.pombo.dto.EmailCadastroDto;
+import com.fiap.pombo.dto.EmailExibicaoDto;
+import com.fiap.pombo.dto.EventoCadastroDto;
+import com.fiap.pombo.dto.EventoExibicaoDto;
+import com.fiap.pombo.exception.EmailNaoExisteException;
+import com.fiap.pombo.exception.EventoNaoExisteException;
+import com.fiap.pombo.model.Email;
 import com.fiap.pombo.model.Evento;
+import com.fiap.pombo.model.Usuario;
 import com.fiap.pombo.repository.EventoRepository;
+import com.fiap.pombo.repository.UsuarioRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,48 +26,72 @@ public class EventoService {
 
     @Autowired
     private EventoRepository eventoRepository;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
-    // Salva um novo evento
-    public Evento saveEvento(Evento evento) {
-        return eventoRepository.save(evento);
+    // Salva um novo evento no banco de dados
+    @Transactional
+    public EventoExibicaoDto salvar(EventoCadastroDto eventoCadastroDto) {
+        // Verificar se o idUsuario no DTO não é nulo
+        if (eventoCadastroDto.idUsuario() == null) {
+            throw new IllegalArgumentException("O ID do usuário não pode ser nulo.");
+        }
+
+        // Encontrar o usuário pelo ID fornecido no DTO
+        Usuario usuario = usuarioRepository.findById(eventoCadastroDto.idUsuario())
+                .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado."));
+
+        // Criar a nova instância de evento
+        Evento evento = new Evento();
+        evento.setDataInicial(eventoCadastroDto.dataInicial());
+        evento.setHoraInicial(eventoCadastroDto.horaInicial());
+        evento.setDataFinal(eventoCadastroDto.dataFinal());
+        evento.setHoraFinal(eventoCadastroDto.horaFinal());
+        evento.setLocalizacao(eventoCadastroDto.localizacao());
+
+        // Associar o usuário ao evento
+        evento.setUsuario(usuario);
+
+        // Salvar e retornar o DTO de resposta
+        return new EventoExibicaoDto(eventoRepository.save(evento));
     }
 
-    // Retorna todos os eventos
-    public List<Evento> getAllEventos() {
-        return eventoRepository.findAll();
+
+    // Retorna todos os eventos cadastrados
+    @Transactional(readOnly = true)
+    public Page<EventoExibicaoDto> listarEvento(Pageable paginacao) {
+        return eventoRepository
+                .findAll(paginacao)
+                .map(EventoExibicaoDto::new);
     }
 
     // Retorna um evento pelo ID
-    public Evento getEventoById(Long id) {
-        Optional<Evento> evento = eventoRepository.findById(id);
-        return evento.orElse(null);
-    }
-
-    // Atualiza um evento existente
-    public Evento updateEvento(Long id, Evento eventoDetails) {
-        Optional<Evento> optionalEvento = eventoRepository.findById(id);
-        if (optionalEvento.isPresent()) {
-            Evento existingEvento = optionalEvento.get();
-            existingEvento.setTitulo(eventoDetails.getTitulo());
-            existingEvento.setDataInicial(eventoDetails.getDataInicial());
-            existingEvento.setHoraInicial(eventoDetails.getHoraInicial());
-            existingEvento.setDataFinal(eventoDetails.getDataFinal());
-            existingEvento.setHoraFinal(eventoDetails.getHoraFinal());
-//            existingEvento.setDescricao(eventoDetails.getDescricao());
-            existingEvento.setLocalizacao(eventoDetails.getLocalizacao());
-            return eventoRepository.save(existingEvento);
+    @Transactional(readOnly = true)
+    public EventoExibicaoDto buscar(Long idEvento) {
+        Optional<Evento> eventoOptional = eventoRepository.findById(idEvento);
+        if (eventoOptional.isPresent()) {
+            return new EventoExibicaoDto(eventoOptional.get());
         } else {
-            return null;
+            throw new EventoNaoExisteException("Evento não encontrado.");
         }
+    }
+    // Atualiza um evento existente pelo ID
+    @Transactional
+    public EventoExibicaoDto atualizar(EventoCadastroDto eventoCadastroDto) {
+        Evento evento = eventoRepository.findById(eventoCadastroDto.idEvento())
+                .orElseThrow(() -> new EventoNaoExisteException("Evento não encontrado."));
+        BeanUtils.copyProperties(eventoCadastroDto, evento);
+        return new EventoExibicaoDto(eventoRepository.save(evento));
     }
 
     // Deleta um evento pelo ID
-    public boolean deleteEvento(Long id) {
-        if (eventoRepository.existsById(id)) {
-            eventoRepository.deleteById(id);
-            return true;
+    @Transactional
+    public void deletar(Long id) {
+        Optional<Evento> eventoOptional = eventoRepository.findById(id);
+        if (eventoOptional.isPresent()) {
+            eventoRepository.delete(eventoOptional.get());
         } else {
-            return false;
+            throw new EventoNaoExisteException("Evento não encontrado.");
         }
     }
 }
