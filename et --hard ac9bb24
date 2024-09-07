@@ -1,0 +1,15 @@
+[33m71dd5b6[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mkarol-branch[m[33m)[m HEAD@{0}: reset: moving to 71dd5b6
+[33mac9bb24[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{1}: checkout: moving from master to karol-branch
+[33mac9bb24[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{2}: pull origin master: Fast-forward
+[33m71dd5b6[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mkarol-branch[m[33m)[m HEAD@{3}: checkout: moving from karol-branch to master
+[33mac9bb24[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{4}: checkout: moving from karol-branch to karol-branch
+[33mac9bb24[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{5}: checkout: moving from karol-branch to karol-branch
+[33mac9bb24[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{6}: merge origin/master: Fast-forward
+[33md43688d[m HEAD@{7}: merge origin/master: Fast-forward
+[33m53bb248[m HEAD@{8}: merge origin/master: Fast-forward
+[33mf51e8f3[m HEAD@{9}: merge origin/master: Fast-forward
+[33m1fa21f1[m HEAD@{10}: merge origin/master: Fast-forward
+[33m9dff8ed[m[33m ([m[1;31morigin/karol-branch[m[33m)[m HEAD@{11}: commit: Criando services, repositories e controllers
+[33mb2c61a0[m HEAD@{12}: commit: Criando pastas e subindo as models
+[33m71dd5b6[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mkarol-branch[m[33m)[m HEAD@{13}: checkout: moving from master to karol-branch
+[33m71dd5b6[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mkarol-branch[m[33m)[m HEAD@{14}: commit (initial): Primeiro commit

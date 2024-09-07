@@ -42,6 +42,11 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/emails").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/emails").hasRole("ADMIN")
 
+                        // Permissões para endpoints de emails
+                        .requestMatchers(HttpMethod.GET, "/api/eventos").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.POST, "/api/eventos").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/eventos").hasRole("ADMIN")
+
                         // Deletar e Autenticar para qualquer outra requisição
                         .requestMatchers(HttpMethod.DELETE, "/api").hasRole("ADMIN").anyRequest().authenticated()
                 )

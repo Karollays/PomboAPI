@@ -2,7 +2,6 @@ package com.fiap.pombo.model;
 
 import jakarta.persistence.*;
 
-import java.sql.Clob;
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -14,6 +13,10 @@ public class Evento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_evento")
     private Long idEvento;
+
+    @ManyToOne
+    @JoinColumn(name = "id_usuario", nullable = false)
+    private Usuario usuario;
 
     @ManyToOne
     @JoinColumn(name = "id_email", nullable = false)
@@ -43,20 +46,28 @@ public class Evento {
     @Column(name = "localizacao", length = 255)
     private String localizacao;
 
-    public Long getIdEvento() {
-        return idEvento;
-    }
-
-    public void setIdEvento(Long idEvento) {
-        this.idEvento = idEvento;
-    }
-
     public Email getEmail() {
         return email;
     }
 
     public void setEmail(Email email) {
         this.email = email;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Long getIdEvento() {
+        return idEvento;
+    }
+
+    public void setIdEvento(Long idEvento) {
+        this.idEvento = idEvento;
     }
 
     public String getTitulo() {
