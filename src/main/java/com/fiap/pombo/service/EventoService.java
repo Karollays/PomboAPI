@@ -9,6 +9,7 @@ import com.fiap.pombo.exception.EventoNaoExisteException;
 import com.fiap.pombo.model.Email;
 import com.fiap.pombo.model.Evento;
 import com.fiap.pombo.model.Usuario;
+import com.fiap.pombo.repository.EmailRepository;
 import com.fiap.pombo.repository.EventoRepository;
 import com.fiap.pombo.repository.UsuarioRepository;
 import org.springframework.beans.BeanUtils;
@@ -28,8 +29,11 @@ public class EventoService {
     private EventoRepository eventoRepository;
     @Autowired
     private UsuarioRepository usuarioRepository;
+    @Autowired
+    private EmailRepository emailRepository;
 
     // Salva um novo evento no banco de dados
+
     @Transactional
     public EventoExibicaoDto salvar(EventoCadastroDto eventoCadastroDto) {
         // Verificar se o idUsuario no DTO não é nulo
@@ -41,20 +45,58 @@ public class EventoService {
         Usuario usuario = usuarioRepository.findById(eventoCadastroDto.idUsuario())
                 .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado."));
 
+        // Verificar se o idEmail no DTO não é nulo
+        if (eventoCadastroDto.idEmail() == null) {
+            throw new IllegalArgumentException("O ID do email não pode ser nulo.");
+        }
+
+        // Encontrar o email pelo ID fornecido no DTO
+        Email email = emailRepository.findById(eventoCadastroDto.idEmail())
+                .orElseThrow(() -> new IllegalArgumentException("Email não encontrado."));
+
         // Criar a nova instância de evento
         Evento evento = new Evento();
+        evento.setTitulo(eventoCadastroDto.titulo());
         evento.setDataInicial(eventoCadastroDto.dataInicial());
         evento.setHoraInicial(eventoCadastroDto.horaInicial());
         evento.setDataFinal(eventoCadastroDto.dataFinal());
         evento.setHoraFinal(eventoCadastroDto.horaFinal());
         evento.setLocalizacao(eventoCadastroDto.localizacao());
 
-        // Associar o usuário ao evento
+        // Associar o usuário e o email ao evento
         evento.setUsuario(usuario);
+        evento.setEmail(email);
 
         // Salvar e retornar o DTO de resposta
         return new EventoExibicaoDto(eventoRepository.save(evento));
     }
+
+//    @Transactional
+//    public EventoExibicaoDto salvar(EventoCadastroDto eventoCadastroDto) {
+//        // Verificar se o idUsuario no DTO não é nulo
+//        if (eventoCadastroDto.idUsuario() == null) {
+//            throw new IllegalArgumentException("O ID do usuário não pode ser nulo.");
+//        }
+//
+//        // Encontrar o usuário pelo ID fornecido no DTO
+//        Usuario usuario = usuarioRepository.findById(eventoCadastroDto.idUsuario())
+//                .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado."));
+//
+//        // Criar a nova instância de evento
+//        Evento evento = new Evento();
+//        evento.setTitulo(eventoCadastroDto.titulo()); // Adicionado Adriano
+//        evento.setDataInicial(eventoCadastroDto.dataInicial());
+//        evento.setHoraInicial(eventoCadastroDto.horaInicial());
+//        evento.setDataFinal(eventoCadastroDto.dataFinal());
+//        evento.setHoraFinal(eventoCadastroDto.horaFinal());
+//        evento.setLocalizacao(eventoCadastroDto.localizacao());
+//
+//        // Associar o usuário ao evento
+//        evento.setUsuario(usuario);
+//
+//        // Salvar e retornar o DTO de resposta
+//        return new EventoExibicaoDto(eventoRepository.save(evento));
+//    }
 
 
     // Retorna todos os eventos cadastrados
