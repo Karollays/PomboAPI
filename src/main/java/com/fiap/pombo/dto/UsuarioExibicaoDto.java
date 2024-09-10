@@ -7,13 +7,17 @@ public record UsuarioExibicaoDto(
         Long id,
         String nome,
         String email,
+        Boolean tema,
+        String cor,
         UsuarioRole role
 ) {
     public UsuarioExibicaoDto(Usuario usuario) {
         this(
                 usuario.getId(),
-                usuario.getUsername(),
+                usuario.getNome(),
                 usuario.getEmail(),
+                usuario.isTema(),
+                usuario.getCor(),
                 usuario.getRole());
     }
 }

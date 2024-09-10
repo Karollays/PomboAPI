@@ -34,6 +34,13 @@ public class Usuario implements UserDetails{
     @Column(name = "ds_senha")
     private String senha;
 
+    // Campo adicionado para preferências
+    @Column(name = "pf_tema", nullable = false)
+    private boolean tema = false;
+
+    @Column(name = "pf_cor", length = 255)
+    private String cor;
+
     @Enumerated(EnumType.STRING)
     private UsuarioRole role;
 
