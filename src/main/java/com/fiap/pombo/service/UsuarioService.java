@@ -3,11 +3,15 @@ package com.fiap.pombo.service;
 
 import com.fiap.pombo.dto.UsuarioCadastroDto;
 import com.fiap.pombo.dto.UsuarioExibicaoDto;
+import com.fiap.pombo.dto.UsuarioPrefCadastroDto;
+import com.fiap.pombo.dto.UsuarioPrefExibicaoDto;
 import com.fiap.pombo.exception.UsuarioNaoExisteException;
 import com.fiap.pombo.model.Usuario;
 import com.fiap.pombo.repository.UsuarioRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -71,11 +75,9 @@ public class UsuarioService {
     }
 
     @Transactional(readOnly = true)
-    public List<UsuarioExibicaoDto> listarUsuarios() {
+    public Page<UsuarioExibicaoDto> listarUsuarios(Pageable paginacao) {
         return usuarioRepository
-                .findAll()
-                .stream()
-                .map(UsuarioExibicaoDto::new)
-                .toList();
+                .findAll(paginacao)
+                .map(UsuarioExibicaoDto::new);
     }
 }
