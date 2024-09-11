@@ -47,6 +47,9 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/eventos").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/eventos").hasRole("ADMIN")
 
+                        // Permissão para endepoint usuariospref
+                        .requestMatchers(HttpMethod.PUT, "/usuariospref/").hasAnyRole("ADMIN", "USER")
+
                         // Deletar e Autenticar para qualquer outra requisição
                         .requestMatchers(HttpMethod.DELETE, "/api").hasRole("ADMIN").anyRequest().authenticated()
                 )
