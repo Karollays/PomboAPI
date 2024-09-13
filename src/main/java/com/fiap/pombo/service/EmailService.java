@@ -53,14 +53,6 @@ public class EmailService {
         return new EmailExibicaoDto(emailRepository.save(email));
     }
 
-
-//    @Transactional
-//    public EmailExibicaoDto salvar(EmailCadastroDto emailCadastroDto) {
-//        Email email = new Email();
-//        BeanUtils.copyProperties(emailCadastroDto, email);
-//        return new EmailExibicaoDto(emailRepository.save(email));
-//    }
-
     // Retorna todos os emails cadastrados
     @Transactional(readOnly = true)
     public Page<EmailExibicaoDto> listarEmail(Pageable paginacao) {

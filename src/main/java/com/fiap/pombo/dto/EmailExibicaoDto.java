@@ -13,7 +13,7 @@ public record EmailExibicaoDto(
         String assunto,
         String mensagem,
         Date dataEmail,
-        Boolean spam
+        boolean spam
 ) {
     public EmailExibicaoDto(Email email) {
         this(

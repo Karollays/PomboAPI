@@ -1,8 +1,6 @@
 package com.fiap.pombo.controller;
 
-import com.fiap.pombo.config.security.TokenService;
 import com.fiap.pombo.dto.LoginDto;
-import com.fiap.pombo.dto.TokenDto;
 import com.fiap.pombo.dto.UsuarioCadastroDto;
 import com.fiap.pombo.dto.UsuarioExibicaoDto;
 import com.fiap.pombo.model.Usuario;
@@ -26,30 +24,27 @@ public class AuthController {
     @Autowired
     private UsuarioService service;
 
-    @Autowired
-    private TokenService tokenService;
-
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Valid LoginDto loginDto){
+    public ResponseEntity<String> login(@RequestBody @Valid LoginDto loginDto){
         UsernamePasswordAuthenticationToken userNamePassword =
                 new UsernamePasswordAuthenticationToken(
                         loginDto.email(),
                         loginDto.senha()
                 );
+
+        // Autenticar o usuário
         Authentication auth = authenticationManager.authenticate(userNamePassword);
 
-        String token = tokenService.gerarToken((Usuario) auth.getPrincipal());
-
-        return ResponseEntity.ok(new TokenDto(token));
+        // Apenas retorna uma mensagem de sucesso ou detalhes do usuário autenticado
+        Usuario usuario = (Usuario) auth.getPrincipal();
+        return ResponseEntity.ok("Login bem-sucedido para: " + usuario.getUsername());
     }
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     public UsuarioExibicaoDto registrar(@RequestBody @Valid UsuarioCadastroDto usuarioCadastroDto){
-        UsuarioExibicaoDto usuarioSalvo = null;
-        usuarioSalvo = service.salvar(usuarioCadastroDto);
-        return usuarioSalvo;
-
+        return service.salvar(usuarioCadastroDto);
     }
 
 }
+
