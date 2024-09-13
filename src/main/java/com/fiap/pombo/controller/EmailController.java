@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -49,13 +50,6 @@ public class EmailController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
-
-//    @GetMapping("/emails/{idEmail}")
-//    @ResponseStatus(HttpStatus.OK)
-//    public EmailExibicaoDto buscar(@PathVariable Long idEmail) {
-//        return emailService.buscar(idEmail);
-//    }
 
     // Update an existing email
     @PutMapping("/emails")
