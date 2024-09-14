@@ -7,6 +7,7 @@ public record UsuarioExibicaoDto(
         Long id,
         String nome,
         String email,
+        String contas,
         Boolean tema,
         String cor,
         UsuarioRole role
@@ -16,6 +17,7 @@ public record UsuarioExibicaoDto(
                 usuario.getId(),
                 usuario.getNome(),
                 usuario.getEmail(),
+                usuario.getContas(),
                 usuario.isTema(),
                 usuario.getCor(),
                 usuario.getRole());
