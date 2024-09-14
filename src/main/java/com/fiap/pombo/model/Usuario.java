@@ -33,6 +33,8 @@ public class Usuario implements UserDetails{
     private String email;
     @Column(name = "ds_senha")
     private String senha;
+    @Column(name = "ds_contas")
+    private String contas;
 
     // Campo adicionado para preferências
     @Column(name = "pf_tema", nullable = false)

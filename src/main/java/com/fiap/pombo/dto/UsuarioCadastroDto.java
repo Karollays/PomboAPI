@@ -15,6 +15,8 @@ public record UsuarioCadastroDto(
         @Email(message = "E-mail em formato inválido")
         String email,
 
+        String contas,
+
         boolean tema,
 
         String cor,
