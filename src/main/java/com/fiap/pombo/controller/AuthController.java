@@ -28,7 +28,7 @@ public class AuthController {
     public ResponseEntity<String> login(@RequestBody @Valid LoginDto loginDto){
         UsernamePasswordAuthenticationToken userNamePassword =
                 new UsernamePasswordAuthenticationToken(
-                        loginDto.email(),
+                        loginDto.nome(),
                         loginDto.senha()
                 );
 

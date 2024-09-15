@@ -6,20 +6,16 @@ import com.fiap.pombo.model.UsuarioRole;
 public record UsuarioExibicaoDto(
         Long id,
         String nome,
-        String email,
         String contas,
-        Boolean tema,
-        String cor,
-        UsuarioRole role
+        boolean tema,
+        String cor
 ) {
     public UsuarioExibicaoDto(Usuario usuario) {
         this(
                 usuario.getId(),
                 usuario.getNome(),
-                usuario.getEmail(),
                 usuario.getContas(),
                 usuario.isTema(),
-                usuario.getCor(),
-                usuario.getRole());
+                usuario.getCor());
     }
 }

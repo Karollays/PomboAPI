@@ -15,7 +15,8 @@ public record EventoExibicaoDto(
         Timestamp horaInicial,
         Date dataFinal,
         Timestamp horaFinal,
-        String localizacao
+        String localizacao,
+        String descaricao
 ) {
     public EventoExibicaoDto(Evento evento){
         this(
@@ -25,7 +26,8 @@ public record EventoExibicaoDto(
                 evento.getHoraInicial(),
                 evento.getDataFinal(),
                 evento.getHoraFinal(),
-                evento.getLocalizacao()
+                evento.getLocalizacao(),
+                evento.getDescricao()
         );
     }
 }

@@ -12,7 +12,6 @@ public record EventoCadastroDto(
 
         Long idEvento,
         Long idUsuario,
-        Long idEmail,
         @NotBlank(message = "Titulo é obrigatório")
         String titulo,
         @NotNull(message = "Data inicial é obrigatório")
@@ -24,6 +23,8 @@ public record EventoCadastroDto(
         @NotNull(message = "Hora final é obrigatório")
         Timestamp horaFinal,
         @NotBlank(message = "Localização é obrigatório")
-        String localizacao
+        String localizacao,
+        @NotBlank(message = "Descrição é obrigatório")
+        String descricao
 ) {
 }

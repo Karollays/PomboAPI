@@ -37,22 +37,22 @@ public class EventoService {
     @Transactional
     public EventoExibicaoDto salvar(EventoCadastroDto eventoCadastroDto) {
         // Verificar se o idUsuario no DTO não é nulo
-        if (eventoCadastroDto.idUsuario() == null) {
-            throw new IllegalArgumentException("O ID do usuário não pode ser nulo.");
-        }
-
+//        if (eventoCadastroDto.idUsuario() == null) {
+//            throw new IllegalArgumentException("O ID do usuário não pode ser nulo.");
+//        }
+//
         // Encontrar o usuário pelo ID fornecido no DTO
         Usuario usuario = usuarioRepository.findById(eventoCadastroDto.idUsuario())
                 .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado."));
-
-        // Verificar se o idEmail no DTO não é nulo
-        if (eventoCadastroDto.idEmail() == null) {
-            throw new IllegalArgumentException("O ID do email não pode ser nulo.");
-        }
-
-        // Encontrar o email pelo ID fornecido no DTO
-        Email email = emailRepository.findById(eventoCadastroDto.idEmail())
-                .orElseThrow(() -> new IllegalArgumentException("Email não encontrado."));
+//
+//        // Verificar se o idEmail no DTO não é nulo
+//        if (eventoCadastroDto.idEmail() == null) {
+//            throw new IllegalArgumentException("O ID do email não pode ser nulo.");
+//        }
+//
+//        // Encontrar o email pelo ID fornecido no DTO
+//        Email email = emailRepository.findById(eventoCadastroDto.idEmail())
+//                .orElseThrow(() -> new IllegalArgumentException("Email não encontrado."));
 
         // Criar a nova instância de evento
         Evento evento = new Evento();
@@ -62,10 +62,11 @@ public class EventoService {
         evento.setDataFinal(eventoCadastroDto.dataFinal());
         evento.setHoraFinal(eventoCadastroDto.horaFinal());
         evento.setLocalizacao(eventoCadastroDto.localizacao());
+        evento.setDescricao(eventoCadastroDto.descricao());
+
 
         // Associar o usuário e o email ao evento
         evento.setUsuario(usuario);
-        evento.setEmail(email);
 
         // Salvar e retornar o DTO de resposta
         return new EventoExibicaoDto(eventoRepository.save(evento));
@@ -90,10 +91,11 @@ public class EventoService {
 //        evento.setDataFinal(eventoCadastroDto.dataFinal());
 //        evento.setHoraFinal(eventoCadastroDto.horaFinal());
 //        evento.setLocalizacao(eventoCadastroDto.localizacao());
+//        evento.setDescricao(eventoCadastroDto.localizacao());
 //
 //        // Associar o usuário ao evento
 //        evento.setUsuario(usuario);
-//
+////
 //        // Salvar e retornar o DTO de resposta
 //        return new EventoExibicaoDto(eventoRepository.save(evento));
 //    }

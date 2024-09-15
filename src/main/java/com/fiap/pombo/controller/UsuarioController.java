@@ -45,6 +45,15 @@ public class UsuarioController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+// Procurar por nome de usuario
+    public ResponseEntity<UsuarioExibicaoDto> buscarPorNome(@PathVariable String nome) {
+        try {
+            UsuarioExibicaoDto usuario = usuarioService.buscarPorNome(nome);
+            return new ResponseEntity<>(usuario, HttpStatus.OK);
+        } catch (UsuarioNaoExisteException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
     // Update an existing user
     @PutMapping("/usuarios")

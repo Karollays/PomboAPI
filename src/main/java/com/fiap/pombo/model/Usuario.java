@@ -3,11 +3,10 @@ package com.fiap.pombo.model;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.Collections;
 
 @Entity
 @Table(name = "T_USUARIO")
@@ -16,7 +15,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class Usuario implements UserDetails{
+public class Usuario implements UserDetails {
+
     @Id
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
@@ -25,14 +25,16 @@ public class Usuario implements UserDetails{
             name = "SEQ_T_USUARIO",
             sequenceName = "SEQ_T_USUARIO",
             allocationSize = 1)
+
     @Column(name = "id_usuario")
     private Long id;
+
     @Column(name = "nm_usuario")
     private String nome;
-    @Column(name = "ds_email")
-    private String email;
+
     @Column(name = "ds_senha")
     private String senha;
+
     @Column(name = "ds_contas")
     private String contas;
 
@@ -43,21 +45,10 @@ public class Usuario implements UserDetails{
     @Column(name = "pf_cor", length = 255)
     private String cor;
 
-    @Enumerated(EnumType.STRING)
-    private UsuarioRole role;
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (this.role == UsuarioRole.ADMIN) {
-            return List.of(
-                    new SimpleGrantedAuthority("ROLE_ADMIN"),
-                    new SimpleGrantedAuthority("ROLE_USER")
-            );
-        } else {
-            return List.of(
-                    new SimpleGrantedAuthority(("ROLE_USER"))
-            );
-        }
+        // Retorna uma lista de authorities. Se não houver roles específicas, retorne uma lista vazia.
+        return Collections.emptyList();
     }
 
     @Override
@@ -67,7 +58,7 @@ public class Usuario implements UserDetails{
 
     @Override
     public String getUsername() {
-        return this.email;
+        return this.nome;
     }
 
     @Override

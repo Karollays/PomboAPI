@@ -11,10 +11,6 @@ public record UsuarioCadastroDto(
         @NotBlank(message = "Nome é obrigatório")
         String nome,
 
-        @NotBlank(message = "E-mail é obrigatório")
-        @Email(message = "E-mail em formato inválido")
-        String email,
-
         String contas,
 
         boolean tema,
@@ -23,8 +19,6 @@ public record UsuarioCadastroDto(
 
         @NotBlank(message = "A senha é obrigatório")
         @Size(min = 6, max= 20, message = "A senha deve conter de 6 a 20 caracteres")
-        String senha,
-
-        UsuarioRole role
+        String senha
 ) {
 }

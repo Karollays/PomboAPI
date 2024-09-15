@@ -9,7 +9,6 @@ import java.sql.Date;
 
 public record EmailCadastroDto(
         Long idEmail,
-        Long idUsuario,
         @NotBlank(message = "Email é obrigatório")
         String deEmail,
         @NotBlank(message = "Email é obrigatório")
@@ -21,7 +20,7 @@ public record EmailCadastroDto(
         @NotNull(message = "A data é obrigatório")
         Date dataEmail,
         @NotNull(message = "O spam é obrigatório")
-        Boolean spam
+        boolean spam
 
 ) {
 }

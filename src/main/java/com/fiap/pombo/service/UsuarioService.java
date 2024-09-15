@@ -80,4 +80,10 @@ public class UsuarioService {
                 .findAll(paginacao)
                 .map(UsuarioExibicaoDto::new);
     }
+
+    public UsuarioExibicaoDto buscarPorNome(String nome) throws UsuarioNaoExisteException {
+        Usuario usuario = usuarioRepository.findByUsername(nome)
+                .orElseThrow(() -> new UsuarioNaoExisteException("Usuário não encontrado"));
+        return new UsuarioExibicaoDto(usuario);
+    }
 }

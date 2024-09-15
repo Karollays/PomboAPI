@@ -10,7 +10,15 @@ import java.sql.Timestamp;
 public class Evento {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "SEQ_T_EVENTO")
+    @SequenceGenerator(
+            name = "SEQ_T_EVENTO",
+            sequenceName = "SEQ_T_EVENTO",
+            allocationSize = 1)
+
+
     @Column(name = "id_evento")
     private Long idEvento;
 
@@ -18,9 +26,9 @@ public class Evento {
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
-    @ManyToOne
-    @JoinColumn(name = "id_email", nullable = false)
-    private Email email;
+//    @ManyToOne
+//    @JoinColumn(name = "id_email", nullable = false)
+//    private Email email;
 
     @Column(name = "titulo", length = 255)
     private String titulo;
@@ -39,20 +47,20 @@ public class Evento {
     @Column(name = "hr_final")
     private Timestamp horaFinal;
 
-//    @Lob
-//    @Column(name = "descricao")
-//    private Clob descricao;
 
     @Column(name = "localizacao", length = 255)
     private String localizacao;
 
-    public Email getEmail() {
-        return email;
-    }
+    @Column(name = "descricao")
+    private String descricao;
 
-    public void setEmail(Email email) {
-        this.email = email;
-    }
+//    public Email getEmail() {
+//        return email;
+//    }
+//
+//    public void setEmail(Email email) {
+//        this.email = email;
+//    }
 
     public Usuario getUsuario() {
         return usuario;
@@ -110,14 +118,6 @@ public class Evento {
         this.horaFinal = horaFinal;
     }
 
-//    public Clob getDescricao() {
-//        return descricao;
-//    }
-//
-//    public void setDescricao(Clob descricao) {
-//        this.descricao = descricao;
-//    }
-
     public String getLocalizacao() {
         return localizacao;
     }
@@ -125,4 +125,8 @@ public class Evento {
     public void setLocalizacao(String localizacao) {
         this.localizacao = localizacao;
     }
+
+    public String getDescricao() {return descricao;}
+
+    public void setDescricao(String descricao) {this.descricao = descricao;}
 }

@@ -29,13 +29,13 @@ public class EmailService {
     @Transactional
     public EmailExibicaoDto salvar(EmailCadastroDto emailCadastroDto) {
         // Verificar se o idUsuario no DTO não é nulo
-        if (emailCadastroDto.idUsuario() == null) {
-            throw new IllegalArgumentException("O ID do usuário não pode ser nulo.");
-        }
-
-        // Encontrar o usuário pelo ID fornecido no DTO
-        Usuario usuario = usuarioRepository.findById(emailCadastroDto.idUsuario())
-                .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado."));
+//        if (emailCadastroDto.idUsuario() == null) {
+//            throw new IllegalArgumentException("O ID do usuário não pode ser nulo.");
+//        }
+//
+//        // Encontrar o usuário pelo ID fornecido no DTO
+//        Usuario usuario = usuarioRepository.findById(emailCadastroDto.idUsuario())
+//                .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado."));
 
         // Criar a nova instância de Email
         Email email = new Email();
@@ -47,7 +47,7 @@ public class EmailService {
         email.setSpam(emailCadastroDto.spam());
 
         // Associar o usuário ao email
-        email.setUsuario(usuario);
+//        email.setUsuario(usuario);
 
         // Salvar e retornar o DTO de resposta
         return new EmailExibicaoDto(emailRepository.save(email));

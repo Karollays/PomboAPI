@@ -12,13 +12,22 @@ import java.util.List;
 public class Email {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "SEQ_T_EMAIL")
+    @SequenceGenerator(
+            name = "SEQ_T_EMAIL",
+            sequenceName = "SEQ_T_EMAIL",
+            allocationSize = 1)
+
+
+
     @Column(name ="id_email")
     private Long idEmail;
 
-    @ManyToOne
-    @JoinColumn(name = "id_usuario", nullable = false)
-    private Usuario usuario;
+//    @ManyToOne
+//    @JoinColumn(name = "id_usuario", nullable = false)
+//    private Usuario usuario;
 
     @NotNull
     @Column(name = "de_email", nullable = false, length = 255)
@@ -44,11 +53,11 @@ public class Email {
     @Column(name = "spam", nullable = false)
     private boolean spam = false;
 
-    @OneToMany(mappedBy = "email", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Imagem> imagens;
+//    @OneToMany(mappedBy = "email", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<Imagem> imagens;
 
-    @OneToMany(mappedBy = "email", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Evento> eventos;
+//    @OneToMany(mappedBy = "email", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<Evento> eventos;
 
     public Long getIdEmail() {
         return idEmail;
@@ -58,13 +67,13 @@ public class Email {
         this.idEmail = idEmail;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
+//    public Usuario getUsuario() {
+//        return usuario;
+//    }
+//
+//    public void setUsuario(Usuario usuario) {
+//        this.usuario = usuario;
+//    }
 
     public String getDeEmail() {
         return deEmail;
@@ -120,19 +129,19 @@ public class Email {
         this.spam = spam;
     }
 
-    public List<Imagem> getImagens() {
-        return imagens;
-    }
-
-    public void setImagens(List<Imagem> imagens) {
-        this.imagens = imagens;
-    }
-
-    public List<Evento> getEventos() {
-        return eventos;
-    }
-
-    public void setEventos(List<Evento> eventos) {
-        this.eventos = eventos;
-    }
+//    public List<Imagem> getImagens() {
+//        return imagens;
+//    }
+//
+//    public void setImagens(List<Imagem> imagens) {
+//        this.imagens = imagens;
+//    }
+//
+//    public List<Evento> getEventos() {
+//        return eventos;
+//    }
+//
+//    public void setEventos(List<Evento> eventos) {
+//        this.eventos = eventos;
+//    }
 }
