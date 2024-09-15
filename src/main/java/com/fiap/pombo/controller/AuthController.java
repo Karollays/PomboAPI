@@ -1,6 +1,7 @@
 package com.fiap.pombo.controller;
 
 import com.fiap.pombo.dto.LoginDto;
+import com.fiap.pombo.dto.LoginResponseDto;
 import com.fiap.pombo.dto.UsuarioCadastroDto;
 import com.fiap.pombo.dto.UsuarioExibicaoDto;
 import com.fiap.pombo.model.Usuario;
@@ -25,7 +26,7 @@ public class AuthController {
     private UsuarioService service;
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody @Valid LoginDto loginDto){
+    public ResponseEntity<LoginResponseDto> login(@RequestBody @Valid LoginDto loginDto){
         UsernamePasswordAuthenticationToken userNamePassword =
                 new UsernamePasswordAuthenticationToken(
                         loginDto.nome(),
@@ -37,7 +38,8 @@ public class AuthController {
 
         // Apenas retorna uma mensagem de sucesso ou detalhes do usuário autenticado
         Usuario usuario = (Usuario) auth.getPrincipal();
-        return ResponseEntity.ok("Login bem-sucedido para: " + usuario.getUsername());
+        LoginResponseDto responseDto = new LoginResponseDto("Login bem-sucedido para: " + usuario.getUsername());
+        return ResponseEntity.ok(responseDto);
     }
 
     @PostMapping("/register")
@@ -47,4 +49,3 @@ public class AuthController {
     }
 
 }
-

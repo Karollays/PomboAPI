@@ -23,7 +23,6 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/emails").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/emails").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/api/emails").permitAll()
