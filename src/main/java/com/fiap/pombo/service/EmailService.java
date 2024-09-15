@@ -42,7 +42,7 @@ public class EmailService {
         email.setDeEmail(emailCadastroDto.deEmail());
         email.setParaEmail(emailCadastroDto.paraEmail());
         email.setAssunto(emailCadastroDto.assunto());
-        email.setMensagem(emailCadastroDto.mensagem());
+        email.setCorpo(emailCadastroDto.corpo());
         email.setDataEmail(emailCadastroDto.dataEmail());
         email.setSpam(emailCadastroDto.spam());
 

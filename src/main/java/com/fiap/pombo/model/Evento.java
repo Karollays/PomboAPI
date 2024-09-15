@@ -6,7 +6,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "T_EVENTO")
+@Table(name = "TBL_EVENT")
 public class Evento {
 
     @Id

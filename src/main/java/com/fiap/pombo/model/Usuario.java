@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 @Entity
-@Table(name = "T_USUARIO")
+@Table(name = "TBL_USER")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -32,10 +32,10 @@ public class Usuario implements UserDetails {
     @Column(name = "nm_usuario")
     private String nome;
 
-    @Column(name = "ds_senha")
+    @Column(name = "senha")
     private String senha;
 
-    @Column(name = "ds_contas")
+    @Column(name = "contas")
     private String contas;
 
     // Campo adicionado para preferências

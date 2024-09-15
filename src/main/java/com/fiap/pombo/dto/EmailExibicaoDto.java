@@ -11,7 +11,7 @@ public record EmailExibicaoDto(
         String deEmail,
         String paraEmail,
         String assunto,
-        String mensagem,
+        String corpo,
         Date dataEmail,
         boolean spam
 ) {
@@ -21,7 +21,7 @@ public record EmailExibicaoDto(
                 email.getDeEmail(),
                 email.getParaEmail(),
                 email.getAssunto(),
-                email.getMensagem(),
+                email.getCorpo(),
                 email.getDataEmail(),
                 email.isSpam());
     }

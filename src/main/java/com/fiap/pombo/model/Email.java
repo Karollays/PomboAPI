@@ -8,7 +8,7 @@ import java.sql.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "T_EMAIL")
+@Table(name = "TBL_EMAIL")
 public class Email {
 
     @Id
@@ -39,8 +39,8 @@ public class Email {
     @Column(name = "assunto", length = 255)
     private String assunto;
 
-    @Column(name = "mensagem", nullable = false, length = 4000)
-    private String mensagem;
+    @Column(name = "corpo", nullable = false, length = 4000)
+    private String corpo;
 
 //    @Lob
 //    @Column(name = "corpo")
@@ -99,9 +99,9 @@ public class Email {
         this.assunto = assunto;
     }
 
-    public String getMensagem() {return mensagem;}
+    public String getCorpo() {return corpo;}
 
-    public void setMensagem(String mensagem) {this.mensagem = mensagem;}
+    public void setCorpo(String corpo) {this.corpo = corpo;}
 
 
 
