@@ -26,7 +26,7 @@ public class AuthController {
     private UsuarioService service;
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseDto> login(@RequestBody @Valid LoginDto loginDto){
+    public ResponseEntity<Void> login(@RequestBody @Valid LoginDto loginDto){
         UsernamePasswordAuthenticationToken userNamePassword =
                 new UsernamePasswordAuthenticationToken(
                         loginDto.nome(),
@@ -36,10 +36,8 @@ public class AuthController {
         // Autenticar o usuário
         Authentication auth = authenticationManager.authenticate(userNamePassword);
 
-        // Apenas retorna uma mensagem de sucesso ou detalhes do usuário autenticado
-        Usuario usuario = (Usuario) auth.getPrincipal();
-        LoginResponseDto responseDto = new LoginResponseDto("Login bem-sucedido para: " + usuario.getUsername());
-        return ResponseEntity.ok(responseDto);
+        // Apenas retorna o status 200 (OK) sem mensagem JSON
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/register")
