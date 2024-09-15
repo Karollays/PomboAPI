@@ -35,15 +35,15 @@ public class Usuario implements UserDetails {
     @Column(name = "senha")
     private String senha;
 
-    @Column(name = "contas")
-    private String contas;
+    @Column(name = "contas", nullable = false)
+    private String contas = "";
 
     // Campo adicionado para preferências
     @Column(name = "pf_tema", nullable = false)
     private boolean tema = false;
 
-    @Column(name = "pf_cor", length = 255)
-    private String cor;
+    @Column(name = "pf_cor", length = 255, nullable = false)
+    private String cor = "";
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

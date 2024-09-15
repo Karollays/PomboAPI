@@ -11,14 +11,25 @@ public record UsuarioCadastroDto(
         @NotBlank(message = "Nome é obrigatório")
         String nome,
 
+        @NotNull
         String contas,
 
         boolean tema,
 
+        @NotNull
         String cor,
 
         @NotBlank(message = "A senha é obrigatório")
         @Size(min = 6, max= 20, message = "A senha deve conter de 6 a 20 caracteres")
         String senha
 ) {
+        // Construtor personalizado para garantir que 'contas' e 'cor' não sejam nulos
+        public UsuarioCadastroDto {
+                if (contas == null) {
+                        contas = ""; // Define valor padrão como string vazia
+                }
+                if (cor == null) {
+                        cor = ""; // Define valor padrão como string vazia
+                }
+        }
 }

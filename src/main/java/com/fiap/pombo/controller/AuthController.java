@@ -26,7 +26,7 @@ public class AuthController {
     private UsuarioService service;
 
     @PostMapping("/login")
-    public ResponseEntity<LoginDto> login(@RequestBody @Valid LoginDto loginDto){
+    public ResponseEntity<UsuarioExibicaoDto> login(@RequestBody @Valid LoginDto loginDto) {
         UsernamePasswordAuthenticationToken userNamePassword =
                 new UsernamePasswordAuthenticationToken(
                         loginDto.nome(),
@@ -34,11 +34,28 @@ public class AuthController {
                 );
 
         // Autenticar o usuário
-        authenticationManager.authenticate(userNamePassword);
+        Authentication auth = authenticationManager.authenticate(userNamePassword);
 
-        // Retorna o mesmo conteúdo enviado no corpo da requisição
-        return ResponseEntity.ok(loginDto);
+        // Recuperar o usuário autenticado
+        Usuario usuario = (Usuario) auth.getPrincipal();
+
+        // Garante que os campos 'contas' e 'cor' não retornem como nulos ou vazios
+        String contas = usuario.getContas() != null ? usuario.getContas() : "";
+        String cor = usuario.getCor() != null ? usuario.getCor() : "";
+
+        // Criar o DTO de exibição do usuário autenticado
+        UsuarioExibicaoDto responseDto = new UsuarioExibicaoDto(
+                usuario.getId(),
+                usuario.getNome(),
+                contas,  // Garante que não seja vazio
+                usuario.isTema(),
+                cor      // Garante que não seja vazio
+        );
+
+        // Retornar o DTO com as informações do usuário autenticado
+        return ResponseEntity.ok(responseDto);
     }
+
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
