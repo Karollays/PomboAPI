@@ -26,7 +26,7 @@ public class AuthController {
     private UsuarioService service;
 
     @PostMapping("/login")
-    public ResponseEntity<Void> login(@RequestBody @Valid LoginDto loginDto){
+    public ResponseEntity<LoginDto> login(@RequestBody @Valid LoginDto loginDto){
         UsernamePasswordAuthenticationToken userNamePassword =
                 new UsernamePasswordAuthenticationToken(
                         loginDto.nome(),
@@ -34,10 +34,10 @@ public class AuthController {
                 );
 
         // Autenticar o usuário
-        Authentication auth = authenticationManager.authenticate(userNamePassword);
+        authenticationManager.authenticate(userNamePassword);
 
-        // Apenas retorna o status 200 (OK) sem mensagem JSON
-        return ResponseEntity.ok().build();
+        // Retorna o mesmo conteúdo enviado no corpo da requisição
+        return ResponseEntity.ok(loginDto);
     }
 
     @PostMapping("/register")
