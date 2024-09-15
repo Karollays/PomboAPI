@@ -10,7 +10,13 @@ public record LoginDto(
 
         @NotBlank
         @Size(min = 6, max = 20, message = "A senha deve conter de 6 a 20 caracteres")
-        String senha
+        String senha,
+
+        String contas,
+
+        boolean tema,
+
+        String cor
 
 
 ) {
