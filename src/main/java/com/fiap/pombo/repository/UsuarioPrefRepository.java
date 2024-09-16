@@ -11,9 +11,9 @@ import java.util.Optional;
 
 public interface UsuarioPrefRepository extends JpaRepository<Usuario, Long> {
 
-    @Query("SELECT c FROM Usuario c WHERE c.nome = :nome")
-    Optional<Usuario> findByUsername(@Param("nome") String nome);
+    @Query("SELECT c FROM Usuario c WHERE c.username = :username")
+    Optional<Usuario> findByUsername(@Param("username") String username);
 
-    UserDetails findByNome(String nome);
+    UserDetails findByusername(String username);
 
 }

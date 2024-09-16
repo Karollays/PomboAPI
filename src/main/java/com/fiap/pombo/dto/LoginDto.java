@@ -4,12 +4,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public record LoginDto(
-        @NotBlank(message = "O nome é obrigatório!")
-        String nome,
+        @NotBlank(message = "O username é obrigatório!")
+        String username,
 
-        @NotBlank(message = "A senha é obrigatória!")
-        @Size(min = 6, max = 20, message = "A senha deve conter de 6 a 20 caracteres")
-        String senha
+        @NotBlank(message = "A password é obrigatória!")
+        @Size(min = 6, max = 20, message = "A password deve conter de 6 a 20 caracteres")
+        String password
 ) {
 }
 

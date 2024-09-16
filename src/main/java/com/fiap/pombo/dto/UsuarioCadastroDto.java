@@ -8,28 +8,28 @@ import jakarta.validation.constraints.Size;
 
 public record UsuarioCadastroDto(
         Long id,
-        @NotBlank(message = "Nome é obrigatório")
-        String nome,
+        @NotBlank(message = "username é obrigatório")
+        String username,
 
         @NotNull
         String contas,
 
-        boolean tema,
+        boolean theme,
 
         @NotNull
-        String cor,
+        String colors,
 
-        @NotBlank(message = "A senha é obrigatório")
-        @Size(min = 6, max= 20, message = "A senha deve conter de 6 a 20 caracteres")
-        String senha
+        @NotBlank(message = "A password é obrigatório")
+        @Size(min = 6, max= 20, message = "A password deve conter de 6 a 20 caracteres")
+        String password
 ) {
-        // Construtor personalizado para garantir que 'contas' e 'cor' não sejam nulos
+        // Construtor personalizado para garantir que 'contas' e 'colors' não sejam nulos
         public UsuarioCadastroDto {
                 if (contas == null) {
                         contas = ""; // Define valor padrão como string vazia
                 }
-                if (cor == null) {
-                        cor = ""; // Define valor padrão como string vazia
+                if (colors == null) {
+                        colors = ""; // Define valor padrão como string vazia
                 }
         }
 }

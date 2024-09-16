@@ -40,11 +40,11 @@ public class Imagem {
 //        this.imagem = imagem;
 //    }
 
-    public Email getEmail() {
+    public Email gethemeil() {
         return email;
     }
 
-    public void setEmail(Email email) {
+    public void sethemeil(Email email) {
         this.email = email;
     }
 

@@ -33,9 +33,9 @@ public class UsuarioPrefService {
         Usuario usuario = usuarioPrefRepository.findById(id)
                 .orElseThrow(() -> new UsuarioNaoExisteException("Usuário não encontrado."));
 
-        // Atualizando apenas os campos tema e cor
-        usuario.setTema(usuarioPrefCadastroDto.tema());
-        usuario.setCor(usuarioPrefCadastroDto.cor());
+        // Atualizando apenas os campos theme e colors
+        usuario.setTheme(usuarioPrefCadastroDto.theme());
+        usuario.setColors(usuarioPrefCadastroDto.colors());
 
         return new UsuarioPrefExibicaoDto(usuarioPrefRepository.save(usuario));
     }

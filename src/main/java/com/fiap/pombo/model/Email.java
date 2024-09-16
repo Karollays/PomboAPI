@@ -39,12 +39,12 @@ public class Email {
     @Column(name = "assunto", length = 255)
     private String assunto;
 
-    @Column(name = "corpo", nullable = false, length = 4000)
-    private String corpo;
+    @Column(name = "colorspo", nullable = false, length = 4000)
+    private String colorspo;
 
 //    @Lob
-//    @Column(name = "corpo")
-//    private Clob corpo;
+//    @Column(name = "colorspo")
+//    private Clob colorspo;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "dt_email")
@@ -99,18 +99,18 @@ public class Email {
         this.assunto = assunto;
     }
 
-    public String getCorpo() {return corpo;}
+    public String getcolorspo() {return colorspo;}
 
-    public void setCorpo(String corpo) {this.corpo = corpo;}
+    public void setcolorspo(String colorspo) {this.colorspo = colorspo;}
 
 
 
-//    public Clob getCorpo() {
-//        return corpo;
+//    public Clob getcolorspo() {
+//        return colorspo;
 //    }
 //
-//    public void setCorpo(Clob corpo) {
-//        this.corpo = corpo;
+//    public void setcolorspo(Clob colorspo) {
+//        this.colorspo = colorspo;
 //    }
 
     public Date getDataEmail() {

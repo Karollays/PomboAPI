@@ -46,12 +46,12 @@ public class UsuarioController {
         }
     }
 
-    // Procurar por nome de usuario
-//    @GetMapping("/users/search/{nome}")
-//    public ResponseEntity<UsuarioExibicaoDto> buscarPorNome(@PathVariable String nome) {
+    // Procurar por username de usuario
+//    @GetMapping("/users/search/{username}")
+//    public ResponseEntity<UsuarioExibicaoDto> buscarPorusername(@PathVariable String username) {
 //
 //        try {
-//            UsuarioExibicaoDto usuario = usuarioService.buscarPorNome(nome);
+//            UsuarioExibicaoDto usuario = usuarioService.buscarPorusername(username);
 //            return new ResponseEntity<>(usuario, HttpStatus.OK);
 //        } catch (UsuarioNaoExisteException e) {
 //            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -62,9 +62,9 @@ public class UsuarioController {
 //    }
 
     @GetMapping("/search")
-    public ResponseEntity<UsuarioExibicaoDto> buscarPorNome(@RequestParam String nome) {
+    public ResponseEntity<UsuarioExibicaoDto> buscarPorusername(@RequestParam String username) {
         try {
-            UsuarioExibicaoDto usuario = usuarioService.buscarPorNome(nome);
+            UsuarioExibicaoDto usuario = usuarioService.buscarPorusername(username);
             return new ResponseEntity<>(usuario, HttpStatus.OK);
         } catch (UsuarioNaoExisteException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -28,8 +28,8 @@ public class UsuarioService {
     @Transactional
     public UsuarioExibicaoDto salvar(UsuarioCadastroDto usuarioCadastroDto) {
 
-        // Criptografar a senha
-        String senhaCriptografada = new BCryptPasswordEncoder().encode(usuarioCadastroDto.senha());
+        // Criptografar a password
+        String passwordCriptografada = new BCryptPasswordEncoder().encode(usuarioCadastroDto.password());
 
         // Criar novo objeto Usuario
         Usuario usuario = new Usuario();
@@ -37,12 +37,12 @@ public class UsuarioService {
         // Copiar propriedades do DTO para a entidade
         BeanUtils.copyProperties(usuarioCadastroDto, usuario);
 
-        // Definir a senha criptografada
-        usuario.setSenha(senhaCriptografada);
+        // Definir a password criptografada
+        usuario.setPassword(passwordCriptografada);
 
-        // Garante que os campos 'contas' e 'cor' nunca sejam nulos
+        // Garante que os campos 'contas' e 'colors' nunca sejam nulos
         usuario.setContas(usuarioCadastroDto.contas() != null ? usuarioCadastroDto.contas() : "");
-        usuario.setCor(usuarioCadastroDto.cor() != null ? usuarioCadastroDto.cor() : "");
+        usuario.setColors(usuarioCadastroDto.colors() != null ? usuarioCadastroDto.colors() : "");
 
         // Salvar o usuário no banco de dados
         Usuario usuarioSalvo = usuarioRepository.save(usuario);
@@ -90,8 +90,8 @@ public class UsuarioService {
                 .map(UsuarioExibicaoDto::new);
     }
 
-    public UsuarioExibicaoDto buscarPorNome(String nome) throws UsuarioNaoExisteException {
-        Usuario usuario = usuarioRepository.findByUsername(nome)
+    public UsuarioExibicaoDto buscarPorusername(String username) throws UsuarioNaoExisteException {
+        Usuario usuario = usuarioRepository.findByUsername(username)
                 .orElseThrow(() -> new UsuarioNaoExisteException("Usuário não encontrado"));
         return new UsuarioExibicaoDto(usuario);
     }

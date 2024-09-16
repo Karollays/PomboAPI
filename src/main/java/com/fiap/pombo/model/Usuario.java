@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+
 import java.util.Collection;
 import java.util.Collections;
 
@@ -30,35 +31,35 @@ public class Usuario implements UserDetails {
     private Long id;
 
     @Column(name = "nm_usuario")
-    private String nome;
+    private String username;
 
-    @Column(name = "senha")
-    private String senha;
+    @Column(name = "password")
+    private String password;
 
     @Column(name = "contas", nullable = false)
     private String contas = "";
 
     // Campo adicionado para preferências
-    @Column(name = "pf_tema", nullable = false)
-    private boolean tema = false;
+    @Column(name = "pf_theme", nullable = false)
+    private boolean theme = false;
 
-    @Column(name = "pf_cor", length = 255, nullable = false)
-    private String cor = "";
+    @Column(name = "pf_colors", length = 255, nullable = false)
+    private String colors = "";
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         // Retorna uma lista de authorities. Se não houver roles específicas, retorne uma lista vazia.
-        return Collections.emptyList();
+        return null;
     }
 
     @Override
     public String getPassword() {
-        return this.senha;
+        return this.password;
     }
 
     @Override
     public String getUsername() {
-        return this.nome;
+        return this.username;
     }
 
     @Override

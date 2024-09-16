@@ -5,13 +5,13 @@ import com.fiap.pombo.model.UsuarioRole;
 
 public record UsuarioPrefExibicaoDto(
 
-        Boolean tema,
-        String cor
+        Boolean theme,
+        String colors
 
 ) {
     public UsuarioPrefExibicaoDto(Usuario usuario) {
         this(
-                usuario.isTema(),
-                usuario.getCor());
+                usuario.isTheme(),
+                usuario.getColors());
     }
 }

@@ -54,11 +54,11 @@ public class Evento {
     @Column(name = "descricao")
     private String descricao;
 
-//    public Email getEmail() {
+//    public Email gethemeil() {
 //        return email;
 //    }
 //
-//    public void setEmail(Email email) {
+//    public void sethemeil(Email email) {
 //        this.email = email;
 //    }
 
