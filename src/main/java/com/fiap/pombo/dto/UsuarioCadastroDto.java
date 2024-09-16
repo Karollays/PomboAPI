@@ -7,17 +7,14 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public record UsuarioCadastroDto(
-        Long id,
+        Long id_usuario,
         @NotBlank(message = "username é obrigatório")
         String username,
 
-
-        @NotNull
         String contas,
 
         boolean theme,
 
-        @NotNull
         String colors,
 
         @NotBlank(message = "A password é obrigatório")

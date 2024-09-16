@@ -28,7 +28,7 @@ public class Usuario implements UserDetails {
             allocationSize = 1)
 
     @Column(name = "id_usuario")
-    private Long id;
+    private Long id_usuario;
 
     @Column(name = "nm_usuario")
     private String username;
@@ -40,7 +40,7 @@ public class Usuario implements UserDetails {
     private String contas = "";
 
     // Campo adicionado para preferências
-    @Column(name = "pf_theme", nullable = false)
+    @Column(name = "pf_theme")
     private boolean theme = false;
 
     @Column(name = "pf_colors", length = 255, nullable = false)

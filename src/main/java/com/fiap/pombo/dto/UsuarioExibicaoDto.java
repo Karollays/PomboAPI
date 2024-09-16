@@ -4,7 +4,7 @@ import com.fiap.pombo.model.Usuario;
 import com.fiap.pombo.model.UsuarioRole;
 
 public record UsuarioExibicaoDto(
-        Long id,
+        Long id_usuario,
         String username,
         String password,
         String contas,
@@ -13,7 +13,7 @@ public record UsuarioExibicaoDto(
 ) {
     public UsuarioExibicaoDto(Usuario usuario) {
         this(
-                usuario.getId(),
+                usuario.getId_usuario(),
                 usuario.getUsername(),
                 usuario.getPassword(),
                 usuario.getContas(),

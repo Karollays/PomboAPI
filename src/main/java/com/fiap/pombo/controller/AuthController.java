@@ -47,7 +47,7 @@ public class AuthController {
 
         // Criar o DTO de exibição do usuário autenticado
         UsuarioExibicaoDto responseDto = new UsuarioExibicaoDto(
-                usuario.getId(),
+                usuario.getId_usuario(),
                 usuario.getUsername(),
                 usuario.getPassword(),
                 contas,  // Garante que não seja vazio

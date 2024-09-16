@@ -67,7 +67,7 @@ public class UsuarioService {
     @Transactional
     public UsuarioExibicaoDto atualizar(UsuarioCadastroDto usuarioCadastroDto) {
 
-        Usuario usuario = usuarioRepository.findById(usuarioCadastroDto.id())
+        Usuario usuario = usuarioRepository.findById(usuarioCadastroDto.id_usuario())
                 .orElseThrow(() -> new UsuarioNaoExisteException("Usuário não encontrado."));
         BeanUtils.copyProperties(usuarioCadastroDto, usuario);
         return new UsuarioExibicaoDto(usuarioRepository.save(usuario));
