@@ -48,8 +48,7 @@ public class Usuario implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // Retorna uma lista de authorities. Se não houver roles específicas, retorne uma lista vazia.
-        return null;
+        return Collections.emptyList(); // ou adicione authorities caso necessário
     }
 
     @Override

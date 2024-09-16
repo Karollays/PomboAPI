@@ -28,8 +28,8 @@ public class UsuarioService {
     @Transactional
     public UsuarioExibicaoDto salvar(UsuarioCadastroDto usuarioCadastroDto) {
 
-        // Criptografar a password
-        String passwordCriptografada = new BCryptPasswordEncoder().encode(usuarioCadastroDto.password());
+        // Usar a senha original sem criptografia
+        String passwordNaoCriptografada = usuarioCadastroDto.password();
 
         // Criar novo objeto Usuario
         Usuario usuario = new Usuario();
@@ -37,8 +37,8 @@ public class UsuarioService {
         // Copiar propriedades do DTO para a entidade
         BeanUtils.copyProperties(usuarioCadastroDto, usuario);
 
-        // Definir a password criptografada
-        usuario.setPassword(passwordCriptografada);
+        // Definir a password sem criptografia
+        usuario.setPassword(passwordNaoCriptografada);
 
         // Garante que os campos 'contas' e 'colors' nunca sejam nulos
         usuario.setContas(usuarioCadastroDto.contas() != null ? usuarioCadastroDto.contas() : "");

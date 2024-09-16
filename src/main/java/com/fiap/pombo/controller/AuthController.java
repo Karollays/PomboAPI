@@ -49,6 +49,7 @@ public class AuthController {
         UsuarioExibicaoDto responseDto = new UsuarioExibicaoDto(
                 usuario.getId(),
                 usuario.getUsername(),
+                usuario.getPassword(),
                 contas,  // Garante que não seja vazio
                 usuario.isTheme(),
                 colors      // Garante que não seja vazio

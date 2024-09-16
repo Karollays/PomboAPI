@@ -11,6 +11,7 @@ public record UsuarioCadastroDto(
         @NotBlank(message = "username é obrigatório")
         String username,
 
+
         @NotNull
         String contas,
 
