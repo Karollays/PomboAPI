@@ -22,21 +22,21 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     // Create a new user
-    @PostMapping("/usuarios")
+    @PostMapping("/users")
     @ResponseStatus(HttpStatus.CREATED)
     public UsuarioExibicaoDto salvar(@RequestBody @Valid UsuarioCadastroDto usuarioCadastroDto) {
         return usuarioService.salvar(usuarioCadastroDto);
     }
 
     // Get a list of all users
-    @GetMapping("/usuarios")
+    @GetMapping("/users")
     @ResponseStatus(HttpStatus.OK)
     public Page<UsuarioExibicaoDto> listarUsuarios(Pageable paginacao) {
         return usuarioService.listarUsuarios(paginacao);
     }
 
     // Get a single user by ID
-    @GetMapping("/usuarios/{idUsuario}")
+    @GetMapping("/users/{idUsuario}")
     public ResponseEntity<UsuarioExibicaoDto> buscar(@PathVariable Long idUsuario) {
         try {
             UsuarioExibicaoDto usuario = usuarioService.buscar(idUsuario);
@@ -45,8 +45,24 @@ public class UsuarioController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-// Procurar por nome de usuario
-    public ResponseEntity<UsuarioExibicaoDto> buscarPorNome(@PathVariable String nome) {
+
+    // Procurar por nome de usuario
+//    @GetMapping("/users/search/{nome}")
+//    public ResponseEntity<UsuarioExibicaoDto> buscarPorNome(@PathVariable String nome) {
+//
+//        try {
+//            UsuarioExibicaoDto usuario = usuarioService.buscarPorNome(nome);
+//            return new ResponseEntity<>(usuario, HttpStatus.OK);
+//        } catch (UsuarioNaoExisteException e) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//
+//        }
+//
+//
+//    }
+
+    @GetMapping("/search")
+    public ResponseEntity<UsuarioExibicaoDto> buscarPorNome(@RequestParam String nome) {
         try {
             UsuarioExibicaoDto usuario = usuarioService.buscarPorNome(nome);
             return new ResponseEntity<>(usuario, HttpStatus.OK);
@@ -55,14 +71,15 @@ public class UsuarioController {
         }
     }
 
+
     // Update an existing user
-    @PutMapping("/usuarios")
+    @PutMapping("/users")
     public UsuarioExibicaoDto atualizar(@RequestBody @Valid UsuarioCadastroDto usuarioCadastroDto) {
         return usuarioService.atualizar(usuarioCadastroDto);
     }
 
     // Delete a user by ID
-    @DeleteMapping("/usuarios/{idUsuario}")
+    @DeleteMapping("/users/{idUsuario}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletar(@PathVariable Long idUsuario) {
         usuarioService.deletar(idUsuario);
