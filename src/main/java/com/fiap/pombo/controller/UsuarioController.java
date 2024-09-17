@@ -61,7 +61,7 @@ public class UsuarioController {
 //
 //    }
 
-    @GetMapping("/search")
+    @GetMapping("/users/search")
     public ResponseEntity<UsuarioExibicaoDto> buscarPorusername(@RequestParam String username) {
         try {
             UsuarioExibicaoDto usuario = usuarioService.buscarPorusername(username);
