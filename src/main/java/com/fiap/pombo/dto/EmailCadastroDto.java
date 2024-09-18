@@ -16,7 +16,7 @@ public record EmailCadastroDto(
         @NotBlank(message = "O Assunto é obrigatório")
         String assunto,
         @NotBlank(message = "O colorspo é obrigatório")
-        String colorspo,
+        String corpo,
         @NotNull(message = "A data é obrigatório")
         Date dataEmail,
         @NotNull(message = "O spam é obrigatório")

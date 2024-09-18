@@ -39,12 +39,8 @@ public class Email {
     @Column(name = "assunto", length = 255)
     private String assunto;
 
-    @Column(name = "colorspo", nullable = false, length = 4000)
-    private String colorspo;
-
-//    @Lob
-//    @Column(name = "colorspo")
-//    private Clob colorspo;
+    @Column(name = "corpo", nullable = false, length = 4000)
+    private String corpo;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "dt_email")
@@ -53,12 +49,6 @@ public class Email {
     @Column(name = "spam", nullable = false)
     private boolean spam = false;
 
-//    @OneToMany(mappedBy = "email", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    private List<Imagem> imagens;
-
-//    @OneToMany(mappedBy = "email", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    private List<Evento> eventos;
-
     public Long getIdEmail() {
         return idEmail;
     }
@@ -66,14 +56,6 @@ public class Email {
     public void setIdEmail(Long idEmail) {
         this.idEmail = idEmail;
     }
-
-//    public Usuario getUsuario() {
-//        return usuario;
-//    }
-//
-//    public void setUsuario(Usuario usuario) {
-//        this.usuario = usuario;
-//    }
 
     public String getDeEmail() {
         return deEmail;
@@ -99,19 +81,9 @@ public class Email {
         this.assunto = assunto;
     }
 
-    public String getcolorspo() {return colorspo;}
+    public String getCorpo() {return corpo;}
 
-    public void setcolorspo(String colorspo) {this.colorspo = colorspo;}
-
-
-
-//    public Clob getcolorspo() {
-//        return colorspo;
-//    }
-//
-//    public void setcolorspo(Clob colorspo) {
-//        this.colorspo = colorspo;
-//    }
+    public void setCorpo(String colorspo) {this.corpo = colorspo;}
 
     public Date getDataEmail() {
         return dataEmail;
@@ -129,19 +101,4 @@ public class Email {
         this.spam = spam;
     }
 
-//    public List<Imagem> getImagens() {
-//        return imagens;
-//    }
-//
-//    public void setImagens(List<Imagem> imagens) {
-//        this.imagens = imagens;
-//    }
-//
-//    public List<Evento> getEventos() {
-//        return eventos;
-//    }
-//
-//    public void setEventos(List<Evento> eventos) {
-//        this.eventos = eventos;
-//    }
 }
