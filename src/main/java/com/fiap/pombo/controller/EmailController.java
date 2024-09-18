@@ -66,13 +66,11 @@ public class EmailController {
 
     @GetMapping("/emails")
     @ResponseStatus(HttpStatus.OK)
-    public Page<EmailExibicaoDto> listarEmail(
-            @RequestParam(required = false) String from,
-            Pageable paginacao) {
+    public List<EmailExibicaoDto> listarEmail(@RequestParam(required = false) String from) {
         if (from != null && !from.isEmpty()) {
-            return emailService.listarEmailPorRemetente(from, paginacao);
+            return emailService.listarEmailPorRemetente(from);
         } else {
-            return emailService.listarEmail(paginacao);
+            return emailService.listarEmail();
         }
     }
 }

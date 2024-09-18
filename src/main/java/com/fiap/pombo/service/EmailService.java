@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EmailService {
@@ -54,11 +55,11 @@ public class EmailService {
     }
 
     // Retorna todos os emails cadastrados
-    @Transactional(readOnly = true)
-    public Page<EmailExibicaoDto> listarEmail(Pageable paginacao) {
-        return emailRepository
-                .findAll(paginacao)
-                .map(EmailExibicaoDto::new);
+    public List<EmailExibicaoDto> listarEmail() {
+        List<Email> emails = emailRepository.findAll();
+        return emails.stream()
+                .map(email -> new EmailExibicaoDto(email)) // Mapeando para o DTO
+                .collect(Collectors.toList());
     }
 
     // Retorna um email pelo ID
@@ -92,10 +93,10 @@ public class EmailService {
         }
     }
 
-    @Transactional(readOnly = true)
-    public Page<EmailExibicaoDto> listarEmailPorRemetente(String deEmail, Pageable paginacao) {
-        return emailRepository
-                .findByDeEmail(deEmail, paginacao)
-                .map(EmailExibicaoDto::new);
+    public List<EmailExibicaoDto> listarEmailPorRemetente(String from) {
+        List<Email> emails = emailRepository.findByDeEmail(from);
+        return emails.stream()
+                .map(email -> new EmailExibicaoDto(email)) // Mapeando para o DTO
+                .collect(Collectors.toList());
     }
 }

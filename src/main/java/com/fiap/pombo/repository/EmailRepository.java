@@ -8,9 +8,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface EmailRepository extends JpaRepository<Email, Long> {
 
-    Page<Email> findByDeEmail(String deEmail, Pageable pageable);
+    // Retorna todos os emails
+    List<Email> findAll();
 
+    // Filtra por remetente sem paginação
+    List<Email> findByDeEmail(String from);
 }
