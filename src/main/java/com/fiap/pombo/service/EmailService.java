@@ -91,4 +91,11 @@ public class EmailService {
             throw new EmailNaoExisteException("Email não encontrado.");
         }
     }
+
+    @Transactional(readOnly = true)
+    public Page<EmailExibicaoDto> listarEmailPorRemetente(String deEmail, Pageable paginacao) {
+        return emailRepository
+                .findByDeEmail(deEmail, paginacao)
+                .map(EmailExibicaoDto::new);
+    }
 }

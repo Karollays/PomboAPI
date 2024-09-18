@@ -34,11 +34,11 @@ public class EmailController {
     }
 
     // Get a list of all emails
-    @GetMapping("/emails")
-    @ResponseStatus(HttpStatus.OK)
-    public Page<EmailExibicaoDto> listarEmail(Pageable paginacao) {
-        return emailService.listarEmail(paginacao);
-    }
+//    @GetMapping("/emails")
+//    @ResponseStatus(HttpStatus.OK)
+//    public Page<EmailExibicaoDto> listarEmail(Pageable paginacao) {
+//        return emailService.listarEmail(paginacao);
+//    }
 
     // Get a single email by ID
     @GetMapping("/emails/{idEmail}")
@@ -62,5 +62,17 @@ public class EmailController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletar(@PathVariable Long idEmail) {
         emailService.deletar(idEmail);
+    }
+
+    @GetMapping("/emails")
+    @ResponseStatus(HttpStatus.OK)
+    public Page<EmailExibicaoDto> listarEmail(
+            @RequestParam(required = false) String from,
+            Pageable paginacao) {
+        if (from != null && !from.isEmpty()) {
+            return emailService.listarEmailPorRemetente(from, paginacao);
+        } else {
+            return emailService.listarEmail(paginacao);
+        }
     }
 }

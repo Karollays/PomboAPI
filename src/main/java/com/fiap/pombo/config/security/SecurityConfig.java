@@ -17,16 +17,12 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain filtrarCadeiaDeSegurança(HttpSecurity httpSecurity) throws Exception{
+    public SecurityFilterChain filtrarCadeiaDeSegurança(HttpSecurity httpSecurity) throws Exception {
 
         return httpSecurity
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.POST, "/api/emails").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/emails").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/api/emails").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "/api/emails").permitAll()
                         .anyRequest().permitAll()
                 )
                 .build();
